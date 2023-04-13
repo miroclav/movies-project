@@ -4,6 +4,8 @@ import PhotosPage from '@/pages/GallaryPage'
 import PostsPage from '@/pages/PostsPage'
 import CalcPage from '@/pages/CalcPage'
 import ToDoPage from '@/pages/ToDoPage'
+import MoviesPage from '@/pages/MoviesPage'
+import UiKit from '@/pages/UiKit'
 
 
 
@@ -27,6 +29,14 @@ const routes = [
   {
     path: '/todo',
     component: ToDoPage
+  },
+  {
+    path: '/movies',
+    component: MoviesPage
+  },
+  {
+    path: '/uikit',
+    component: UiKit
   },
 
 ]

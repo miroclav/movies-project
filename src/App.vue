@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <Navbar />
+        <Navbar class="d-flex justify-center" />
         <v-container>
             <router-view></router-view>
         </v-container>
@@ -15,8 +15,6 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-    margin-top: 60px;
-}
+<style lang="scss">
+@import "@/components/styles/global.scss";
 </style>

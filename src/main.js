@@ -19,6 +19,8 @@ const vuetify = createVuetify({
   directives,
 })
 
+
+
 const app = createApp(App)
 
 compotents.forEach(component => {

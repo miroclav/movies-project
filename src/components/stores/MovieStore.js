@@ -1,44 +1,74 @@
 import { defineStore } from "pinia";
 
+const urlTop = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1'
+const urlSearch = 'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword='
+
 export const useMovieStore = defineStore("movieStore", {
   state: () => ({
-    movies: [
-      {
-        id: 1,
-        original_title: "Spider-Man",
-        overview:
-          "After being bitten by a genetically altered spider at Oscorp, nerdy but endearing high school student Peter Parker is endowed with amazing powers to become the superhero known as Spider-Man.",
-        poster_path: "/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg",
-        release_date: "2002-05-01",
-        isWatched: false,
-      },
-      {
-        id: 2,
-        original_title: "The Batman",
-        overview:
-          "In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler.",
-        poster_path: "/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
-        release_date: "2022-03-01",
-        isWatched: true,
-      },
-    ],
+    films: [],
+    searchFilms: [],
+    favorite: [],
     activeTab: 1,
+    isWatched: false,
+    loader: false,
   }),
-  getters: {
-    watchedMovie() {
-      return this.movies.filter(el => (el.isWatched))
-    }
-  },
   actions: {
+    async getMovies() {
+      this.loader = true
+      const res = await fetch(urlTop, {
+        method: 'GET',
+        headers: {
+          'X-API-KEY': 'e8d19d5c-9c24-4f5b-bab8-0d01fa0fbff7',
+          'Content-Type': 'application/json',
+        },
+      })
+      const data = await res.json()
+      this.films = data.films
+      this.loader = false
+    },
+    async getSearchMovies(search) {
+      this.loader = true
+      const res = await fetch(`${urlSearch}${search}`, {
+        method: 'GET',
+        headers: {
+          'X-API-KEY': 'e8d19d5c-9c24-4f5b-bab8-0d01fa0fbff7',
+          'Content-Type': 'application/json',
+        },
+      })
+      const data = await res.json()
+      this.searchFilms = data.films
+      this.loader = false
+    },
+
+    addToFavorite(film) {
+      this.favorite.push({ ...film, isWatched: false })
+      this.activeTab = 3
+    },
+
     setActiveTab(id) {
       this.activeTab = id
     },
     toggleWatched(id) {
-      const idx = this.movies.findIndex((el) => el.id === id)
-      this.movies[idx].isWatched = !this.movies[idx].isWatched
+      const idx = this.favorite.findIndex((el) => el.filmId === id)
+      this.favorite[idx].isWatched = !this.favorite[idx].isWatched
     },
     deleteMovie(id) {
-      this.movies = this.movies.filter(el => el.id !== id)
+      this.favorite = this.favorite.filter(el => el.filmId !== id)
     }
   },
+  getters: {
+    watchedMovie() {
+      return this.favorite.filter(el => (el.isWatched))
+    },
+    unWatchedMovie() {
+      return this.favorite.filter(el => (el.isWatched === false))
+    },
+    favoriteMovie() {
+      return this.favorite
+    },
+    totalCountMovies() {
+      return this.films.length
+    }
+  },
+
 });
