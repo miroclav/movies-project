@@ -1,4 +1,5 @@
 <script setup>
+const name = "Button"
 const props = defineProps({
     label: {
         type: String,

@@ -1,9 +1,9 @@
 <template>
     <v-app>
-        <Navbar class="d-flex justify-center" />
-        <v-container>
+        <Navbar />
+        <div class="container">
             <router-view></router-view>
-        </v-container>
+        </div>
     </v-app>
 </template>
 
@@ -17,4 +17,8 @@ export default {
 
 <style lang="scss">
 @import "@/components/styles/global.scss";
+.container {
+    margin-top: 5rem;
+    padding: 0 5rem;
+}
 </style>

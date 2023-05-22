@@ -4,19 +4,16 @@
 
 <style>
 .loader {
+    border: 5px solid #f3f3f3; /* Цвет загрузчика */
+    border-top: 5px solid var(--primary); /* Цвет загрузчика при движении */
+    border-radius: 50%;
     width: 60px;
     height: 60px;
-    margin-top: 50px;
-    margin-left: 400px;
-    border-radius: 50%;
-    display: inline-block;
-    border-top: 4px solid #1c55b1;
-    border-right: 3px solid transparent;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
 }
 
-@keyframes rotation {
+@keyframes spin {
     0% {
         transform: rotate(0deg);
     }

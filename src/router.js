@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import RegistrationPage from '@/pages/RegistrationPage'
 import PhotosPage from '@/pages/GallaryPage'
 import PostsPage from '@/pages/PostsPage'
-import CalcPage from '@/pages/CalcPage'
 import ToDoPage from '@/pages/ToDoPage'
 import MoviesPage from '@/pages/MoviesPage'
 import UiKit from '@/pages/UiKit'
@@ -22,10 +21,7 @@ const routes = [
     path: '/posts',
     component: PostsPage
   },
-  {
-    path: '/calc',
-    component: CalcPage
-  },
+
   {
     path: '/todo',
     component: ToDoPage

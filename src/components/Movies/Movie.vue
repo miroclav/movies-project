@@ -64,6 +64,7 @@
                         size="small"
                         rounded
                     />
+                    <v-btn icon="mdi-delete-outline"></v-btn>
                 </div>
 
                 <Button
